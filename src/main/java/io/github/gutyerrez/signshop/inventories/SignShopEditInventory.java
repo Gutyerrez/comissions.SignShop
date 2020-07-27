@@ -73,6 +73,8 @@ public class SignShopEditInventory extends CustomInventory {
                                 signShop.setPrice(price);
                                 signShop.updateSign();
 
+                                player.sendMessage("§aLoja atualizada com sucesso!");
+
                                 SignShopProvider.Repositories.SIGN_SHOP.provide().update(
                                         signShop.getId(),
                                         signShop.getName(),
@@ -123,6 +125,8 @@ public class SignShopEditInventory extends CustomInventory {
                                 signShop.setQuantity(quantity);
                                 signShop.updateSign();
 
+                                player.sendMessage("§aLoja atualizada com sucesso!");
+
                                 SignShopProvider.Repositories.SIGN_SHOP.provide().update(
                                         signShop.getId(),
                                         signShop.getName(),
@@ -165,6 +169,8 @@ public class SignShopEditInventory extends CustomInventory {
 
                                 signShop.setName(message);
                                 signShop.updateSign();
+
+                                player.sendMessage("§aLoja atualizada com sucesso!");
 
                                 SignShopProvider.Repositories.SIGN_SHOP.provide().update(
                                         signShop.getId(),

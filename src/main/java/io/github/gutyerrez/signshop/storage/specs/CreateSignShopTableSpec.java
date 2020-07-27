@@ -24,7 +24,7 @@ public class CreateSignShopTableSpec extends ExecuteSqlSpec<Void> {
                             "`id` INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT," +
                             "`name` VARCHAR(255)," +
                             "`type` VARCHAR(255) NOT NULL," +
-                            "`serialized_item` VARCHAR(255)," +
+                            "`serialized_item` TEXT," +
                             "`quantity` INTEGER NOT NULL," +
                             "`price` DOUBLE NOT NULL," +
                             "`world_name` VARCHAR(25)," +

@@ -1,10 +1,12 @@
 package io.github.gutyerrez.signshop.inventories;
 
+import io.github.gutyerrez.core.spigot.CoreSpigotConstants;
 import io.github.gutyerrez.core.spigot.inventory.CustomInventory;
 import io.github.gutyerrez.core.spigot.misc.utils.ItemBuilder;
 import io.github.gutyerrez.signshop.SignShopProvider;
 import io.github.gutyerrez.signshop.api.SignShop;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.inventory.Inventory;
@@ -63,6 +65,7 @@ public class SignShopChangeItemInventory extends CustomInventory {
     public void onClose(InventoryCloseEvent event) {
         super.onClose(event);
 
+        Player player = (Player) event.getPlayer();
         Inventory inventory = event.getInventory();
 
         ItemStack itemStack = inventory.getItem(13);
@@ -74,6 +77,11 @@ public class SignShopChangeItemInventory extends CustomInventory {
         if (this.signShop == null) return;
 
         this.signShop.setItem(itemStack);
+
+        player.sendMessage(String.format(
+                "§aVocê alterou o item da loja para %s.",
+                CoreSpigotConstants.TRANSLATE_ITEM.get(itemStack)
+        ));
 
         SignShopProvider.Repositories.SIGN_SHOP.provide().update(
                 this.signShop.getId(),
