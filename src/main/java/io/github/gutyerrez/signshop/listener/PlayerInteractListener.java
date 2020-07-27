@@ -55,7 +55,7 @@ public class PlayerInteractListener implements Listener {
                     player.sendMessage(String.format(
                             "§aVocê comprou %dx %s por %s coins.",
                             signShop.getQuantity(),
-                            ChatColor.stripColor(signShop.getFancyName()),
+                            signShop.getName() == null ? ChatColor.stripColor(signShop.getFancyName()) : signShop.getName(),
                             NumberUtils.format(signShop.getPrice())
                     ));
 
