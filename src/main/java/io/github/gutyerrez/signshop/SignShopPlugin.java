@@ -26,11 +26,7 @@ public class SignShopPlugin extends CustomPlugin {
     public void onEnable() {
         saveDefaultConfig();
 
-        try {
-            SignShopProvider.prepare();
-        } catch (ServiceAlreadyPreparedException exception) {
-            exception.printStackTrace();
-        }
+        SignShopProvider.prepare();
 
         PluginManager pluginManager = Bukkit.getPluginManager();
 
