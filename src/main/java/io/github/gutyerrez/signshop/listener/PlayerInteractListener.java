@@ -48,7 +48,9 @@ public class PlayerInteractListener implements Listener {
                         return;
                     }
 
-                    SignShopProvider.Hooks.ECONOMY.get().withdrawPlayer(player, signShop.getPrice());
+                    if (SignShopProvider.Hooks.ECONOMY.isActive()) {
+                        SignShopProvider.Hooks.ECONOMY.get().withdrawPlayer(player, signShop.getPrice());
+                    }
 
                     player.sendMessage(String.format(
                             "§aVocê comprou %dx %s por %s",
@@ -80,7 +82,9 @@ public class PlayerInteractListener implements Listener {
                         return;
                     }
 
-                    SignShopProvider.Hooks.ECONOMY.get().withdrawPlayer(player, signShop.getPrice());
+                    if (SignShopProvider.Hooks.ECONOMY.isActive()) {
+                        SignShopProvider.Hooks.ECONOMY.get().withdrawPlayer(player, signShop.getPrice());
+                    }
 
                     Integer count = InventoryUtils.countItems(
                             player.getInventory(),

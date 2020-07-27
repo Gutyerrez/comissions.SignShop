@@ -96,7 +96,7 @@ public class SignShop {
             );
         }
 
-        if (SignShopProvider.Hooks.ECONOMY.get().getBalance(player) < this.price) {
+        if (SignShopProvider.Hooks.ECONOMY.isActive() && SignShopProvider.Hooks.ECONOMY.get().getBalance(player) < this.price) {
             return ImmutableSet.of(
                     String.format(
                             "§cVocê precisa de %s coins para comprar nesta loja.",
