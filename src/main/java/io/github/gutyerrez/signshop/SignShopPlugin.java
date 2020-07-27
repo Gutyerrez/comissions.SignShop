@@ -1,6 +1,5 @@
 package io.github.gutyerrez.signshop;
 
-import io.github.gutyerrez.core.shared.exceptions.ServiceAlreadyPreparedException;
 import io.github.gutyerrez.core.spigot.CustomPlugin;
 import io.github.gutyerrez.signshop.listener.AsyncPlayerChatListener;
 import io.github.gutyerrez.signshop.listener.BlockPhysicsListener;
@@ -24,8 +23,6 @@ public class SignShopPlugin extends CustomPlugin {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
-
         SignShopProvider.prepare();
 
         PluginManager pluginManager = Bukkit.getPluginManager();
