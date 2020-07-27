@@ -67,13 +67,12 @@ public class SignShopChangeItemInventory extends CustomInventory {
 
         this.signShop.setItem(itemStack);
 
-        SignShopProvider.Repositories.SIGN_SHOP.provide().insert(
+        SignShopProvider.Repositories.SIGN_SHOP.provide().update(
+                this.signShop.getId(),
                 this.signShop.getName(),
-                this.signShop.getType(),
                 this.signShop.getItem(),
                 this.signShop.getQuantity(),
-                this.signShop.getPrice(),
-                this.signShop.getSerializedLocation()
+                this.signShop.getPrice()
         );
     }
 }

@@ -38,4 +38,5 @@ public class CreateSignShopTableSpec extends ExecuteSqlSpec<Void> {
             return connection.prepareStatement(query);
         };
     }
+
 }

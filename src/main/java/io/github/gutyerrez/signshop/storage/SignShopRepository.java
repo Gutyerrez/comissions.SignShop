@@ -4,10 +4,7 @@ import io.github.gutyerrez.core.shared.contracts.storages.repositories.MysqlRepo
 import io.github.gutyerrez.core.shared.providers.MysqlDatabaseProvider;
 import io.github.gutyerrez.core.shared.world.location.SerializedLocation;
 import io.github.gutyerrez.signshop.api.SignShop;
-import io.github.gutyerrez.signshop.storage.specs.CreateSignShopTableSpec;
-import io.github.gutyerrez.signshop.storage.specs.DeleteSignShopSpec;
-import io.github.gutyerrez.signshop.storage.specs.InsertOrUpdateSignShopSpec;
-import io.github.gutyerrez.signshop.storage.specs.SelectAllSignShopsSpec;
+import io.github.gutyerrez.signshop.storage.specs.*;
 import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
@@ -24,7 +21,7 @@ public class SignShopRepository extends MysqlRepository {
         this.createTable();
     }
 
-    private void createTable() {
+    protected void createTable() {
         this.query(new CreateSignShopTableSpec());
     }
 
@@ -33,7 +30,11 @@ public class SignShopRepository extends MysqlRepository {
     }
 
     public SignShop insert(String name, SignShop.Type type, ItemStack item, Integer quantity, Double price, SerializedLocation serializedLocation) {
-        return this.query(new InsertOrUpdateSignShopSpec(name, type, item, quantity, price, serializedLocation));
+        return this.query(new InsertSignShopSpec(name, type, item, quantity, price, serializedLocation));
+    }
+
+    public void update(Integer id, String name, ItemStack item, Integer quantity, Double price) {
+        this.query(new UpdateSignShopSpec(id, name, item, quantity, price));
     }
 
     public void delete(Integer id) {

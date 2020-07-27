@@ -55,6 +55,8 @@ public class SignChangeListener implements Listener {
             return;
         }
 
+        event.setLine(1, String.format("%s %b", type.getPrefix(), price));
+
         Integer quantity = Ints.tryParse(event.getLine(2));
 
         if (quantity == null || quantity < 1) {
@@ -63,6 +65,8 @@ public class SignChangeListener implements Listener {
             player.sendMessage("§cVocê inseriu uma quantia inválida!");
             return;
         }
+
+        event.setLine(3, "???");
 
         SerializedLocation serializedLocation = new SerializedLocation(
                 block.getWorld().getName(),

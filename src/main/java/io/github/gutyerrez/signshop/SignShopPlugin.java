@@ -34,6 +34,9 @@ public class SignShopPlugin extends CustomPlugin {
 
         pluginManager.registerEvents(new SignChangeListener(), this);
         pluginManager.registerEvents(new AsyncPlayerChatListener(), this);
+
+        SignShopProvider.Repositories.SIGN_SHOP.provide().fetchAll()
+                .forEach(SignShopProvider.Cache.Local.SIGN_SHOP.provide()::add);
     }
 
     public static Object get(String key) {

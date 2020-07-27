@@ -3,4 +3,5 @@ main: io.github.gutyerrez.signshop.SignShopPlugin
 version: 0.1-ALPHA
 author: Gutyerrez
 depend:
+  - Core
   - Vault

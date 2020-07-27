@@ -10,9 +10,9 @@
         <version>0.1-ALPHA</version>
     </parent>
 
-    <artifactId>shop</artifactId>
+    <artifactId>sign-shop</artifactId>
 
-    <name>Shop</name>
+    <name>SignShop</name>
 
     <dependencies>
         <!-- paper api -->

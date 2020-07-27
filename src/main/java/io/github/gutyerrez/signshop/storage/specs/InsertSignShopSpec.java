@@ -4,6 +4,7 @@ import io.github.gutyerrez.core.shared.contracts.storages.repositories.specs.Ins
 import io.github.gutyerrez.core.shared.contracts.storages.repositories.specs.PreparedStatementCreator;
 import io.github.gutyerrez.core.shared.world.location.SerializedLocation;
 import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;
+import io.github.gutyerrez.signshop.SignShopConstants;
 import io.github.gutyerrez.signshop.api.SignShop;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.inventory.ItemStack;
@@ -17,7 +18,7 @@ import java.sql.Statement;
  * @author SrGutyerrez
  */
 @RequiredArgsConstructor
-public class InsertOrUpdateSignShopSpec extends InsertSqlSpec<SignShop> {
+public class InsertSignShopSpec extends InsertSqlSpec<SignShop> {
 
     private final String name;
     private final SignShop.Type type;
@@ -54,7 +55,8 @@ public class InsertOrUpdateSignShopSpec extends InsertSqlSpec<SignShop> {
                             "`x`," +
                             "`y`," +
                             "`z`" +
-                            ")"
+                            ");",
+                    SignShopConstants.Databases.Mysql.Tables.SIGN_SHOP_TABLE_NAME
             );
 
             PreparedStatement preparedStatement = connection.prepareStatement(

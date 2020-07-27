@@ -67,13 +67,12 @@ public class SignShopEditInventory extends CustomInventory {
 
                                 signShop.setPrice(price);
 
-                                SignShopProvider.Repositories.SIGN_SHOP.provide().insert(
+                                SignShopProvider.Repositories.SIGN_SHOP.provide().update(
+                                        signShop.getId(),
                                         signShop.getName(),
-                                        signShop.getType(),
                                         signShop.getItem(),
                                         signShop.getQuantity(),
-                                        signShop.getPrice(),
-                                        signShop.getSerializedLocation()
+                                        signShop.getPrice()
                                 );
                             }
                     );
@@ -112,13 +111,12 @@ public class SignShopEditInventory extends CustomInventory {
 
                                 signShop.setQuantity(quantity);
 
-                                SignShopProvider.Repositories.SIGN_SHOP.provide().insert(
+                                SignShopProvider.Repositories.SIGN_SHOP.provide().update(
+                                        signShop.getId(),
                                         signShop.getName(),
-                                        signShop.getType(),
                                         signShop.getItem(),
                                         signShop.getQuantity(),
-                                        signShop.getPrice(),
-                                        signShop.getSerializedLocation()
+                                        signShop.getPrice()
                                 );
                             }
                     );
@@ -186,13 +184,12 @@ public class SignShopEditInventory extends CustomInventory {
 
                                 signShop.setName(message);
 
-                                SignShopProvider.Repositories.SIGN_SHOP.provide().insert(
+                                SignShopProvider.Repositories.SIGN_SHOP.provide().update(
+                                        signShop.getId(),
                                         signShop.getName(),
-                                        signShop.getType(),
                                         signShop.getItem(),
                                         signShop.getQuantity(),
-                                        signShop.getPrice(),
-                                        signShop.getSerializedLocation()
+                                        signShop.getPrice()
                                 );
                             }
                     );
