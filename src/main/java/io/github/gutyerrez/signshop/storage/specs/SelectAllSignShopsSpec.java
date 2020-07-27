@@ -39,7 +39,7 @@ public class SelectAllSignShopsSpec extends SelectSqlSpec<Map<Location, SignShop
                                 SignShop.Type.valueOf(
                                         resultSet.getString("type")
                                 ),
-                                InventoryUtils.deserializeContents(
+                                resultSet.getString("serialized_item") == null ? null : InventoryUtils.deserializeContents(
                                         resultSet.getString("serialized_item")
                                 )[0],
                                 resultSet.getInt("quantity"),
