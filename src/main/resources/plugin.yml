@@ -1,0 +1,6 @@
+name: SignShop
+main: io.github.gutyerrez.signshop.SignShopPlugin
+version: 0.1-ALPHA
+author: Gutyerrez
+depend:
+  - Vault
