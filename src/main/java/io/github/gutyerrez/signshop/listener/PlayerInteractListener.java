@@ -53,7 +53,7 @@ public class PlayerInteractListener implements Listener {
                     }
 
                     player.sendMessage(String.format(
-                            "§aVocê comprou %dx %s por %s",
+                            "§aVocê comprou %dx %s por %s coins.",
                             signShop.getQuantity(),
                             ChatColor.stripColor(signShop.getFancyName()),
                             NumberUtils.format(signShop.getPrice())
