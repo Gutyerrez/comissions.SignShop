@@ -17,8 +17,8 @@ public class SignShopChangeItemInventory extends CustomInventory {
 
     private SignShop signShop;
 
-    public SignShopChangeItemInventory(SignShop signShop) {
-        super(3 * 9, "Coloque o item no slot");
+    public SignShopChangeItemInventory(SignShop signShop, CustomInventory backInventory) {
+        super(4 * 9, "Coloque o item no slot");
 
         this.signShop = signShop;
 
@@ -29,12 +29,20 @@ public class SignShopChangeItemInventory extends CustomInventory {
 
             this.setItem(
                     i,
-                    new ItemBuilder(Material.STAINED_GLASS)
-                            .data(5)
+                    new ItemBuilder(Material.STAINED_GLASS_PANE)
+                            .durability(5)
                             .name("§aColoque o item no meio do inventário.")
                             .make()
             );
         }
+
+        if (backInventory != null) {
+            this.backItem(backInventory);
+        }
+    }
+
+    public SignShopChangeItemInventory(SignShop signShop) {
+        this(signShop, null);
     }
 
     @Override

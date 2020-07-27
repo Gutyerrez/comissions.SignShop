@@ -3,6 +3,8 @@ package io.github.gutyerrez.signshop;
 import io.github.gutyerrez.core.shared.exceptions.ServiceAlreadyPreparedException;
 import io.github.gutyerrez.core.spigot.CustomPlugin;
 import io.github.gutyerrez.signshop.listener.AsyncPlayerChatListener;
+import io.github.gutyerrez.signshop.listener.BlockPhysicsListener;
+import io.github.gutyerrez.signshop.listener.PlayerInteractListener;
 import io.github.gutyerrez.signshop.listener.SignChangeListener;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -33,6 +35,8 @@ public class SignShopPlugin extends CustomPlugin {
         PluginManager pluginManager = Bukkit.getPluginManager();
 
         pluginManager.registerEvents(new SignChangeListener(), this);
+        pluginManager.registerEvents(new BlockPhysicsListener(), this);
+        pluginManager.registerEvents(new PlayerInteractListener(), this);
         pluginManager.registerEvents(new AsyncPlayerChatListener(), this);
 
         SignShopProvider.Repositories.SIGN_SHOP.provide().fetchAll()

@@ -6,6 +6,7 @@ import io.github.gutyerrez.core.shared.misc.utils.NumberUtils;
 import io.github.gutyerrez.core.shared.world.location.SerializedLocation;
 import io.github.gutyerrez.core.spigot.CoreSpigotConstants;
 import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;
+import io.github.gutyerrez.signshop.SignShopConstants;
 import io.github.gutyerrez.signshop.SignShopProvider;
 import lombok.*;
 import org.bukkit.Location;
@@ -49,10 +50,21 @@ public class SignShop {
 
     private final SerializedLocation serializedLocation;
 
+    public void updateSign() {
+        Sign sign = this.getSign();
+
+        sign.setLine(0, SignShopConstants.SHOP_NAME);
+        sign.setLine(1, String.format("%s %.2f", this.type.getPrefix(), this.price));
+        sign.setLine(2, String.valueOf(this.quantity));
+        sign.setLine(3, this.name == null ? "???" : this.name);
+
+        sign.update();
+    }
+
     public String getFancyName() {
-        return this.hasValidItem() ? CoreSpigotConstants.TRANSLATE_ITEM.get(
+        return this.hasValidItem() ? String.format("§f%s", CoreSpigotConstants.TRANSLATE_ITEM.get(
                 this.getItem()
-        ) : "§cNenhum item definido.";
+        )) : "§cNenhum item definido.";
     }
 
     public Sign getSign() {

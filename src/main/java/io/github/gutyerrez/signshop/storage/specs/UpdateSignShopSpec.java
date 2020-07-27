@@ -30,7 +30,7 @@ public class UpdateSignShopSpec extends UpdateSqlSpec<Void> {
     public PreparedStatementCreator getPreparedStatementCreator() {
         return connection -> {
             String query = String.format(
-                    "UPDATE `%s` SET `name`=?, `serialized_item`=?, `quantity`=?, `price`=? WHERE `id`=?);",
+                    "UPDATE `%s` SET `name`=?, `serialized_item`=?, `quantity`=?, `price`=? WHERE `id`=?;",
                     SignShopConstants.Databases.Mysql.Tables.SIGN_SHOP_TABLE_NAME
             );
 

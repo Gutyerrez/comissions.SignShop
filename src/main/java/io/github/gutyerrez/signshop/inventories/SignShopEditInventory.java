@@ -46,15 +46,20 @@ public class SignShopEditInventory extends CustomInventory {
                 (event) -> {
                     Player player = (Player) event.getWhoClicked();
 
+                    player.closeInventory();
+
                     player.sendMessage("§aInsira o novo valor desejado abaixo.");
                     player.sendMessage("§7Caso queira cancelar digite 'cancelar'.");
 
                     AsyncPlayerChatListener.on(
                             player,
                             (onChat) -> {
+                                onChat.setCancelled(true);
+
                                 String message = onChat.getMessage();
 
                                 if (message.equalsIgnoreCase("cancelar")) {
+                                    player.sendMessage("§cVocê cancelou a alteração com sucesso!");
                                     return;
                                 }
 
@@ -66,6 +71,7 @@ public class SignShopEditInventory extends CustomInventory {
                                 }
 
                                 signShop.setPrice(price);
+                                signShop.updateSign();
 
                                 SignShopProvider.Repositories.SIGN_SHOP.provide().update(
                                         signShop.getId(),
@@ -90,15 +96,20 @@ public class SignShopEditInventory extends CustomInventory {
                 (event) -> {
                     Player player = (Player) event.getWhoClicked();
 
+                    player.closeInventory();
+
                     player.sendMessage("§aInsira a nova quantia desejada abaixo.");
                     player.sendMessage("§7Caso queira cancelar digite 'cancelar'.");
 
                     AsyncPlayerChatListener.on(
                             player,
                             (onChat) -> {
+                                onChat.setCancelled(true);
+
                                 String message = onChat.getMessage();
 
                                 if (message.equalsIgnoreCase("cancelar")) {
+                                    player.sendMessage("§cVocê cancelou a alteração com sucesso!");
                                     return;
                                 }
 
@@ -110,6 +121,7 @@ public class SignShopEditInventory extends CustomInventory {
                                 }
 
                                 signShop.setQuantity(quantity);
+                                signShop.updateSign();
 
                                 SignShopProvider.Repositories.SIGN_SHOP.provide().update(
                                         signShop.getId(),
@@ -124,8 +136,51 @@ public class SignShopEditInventory extends CustomInventory {
         );
 
         this.setItem(
-                31,
-                new ItemBuilder(Material.STORAGE_MINECART)
+                32,
+                new ItemBuilder(Material.BOOK_AND_QUILL)
+                        .name("§eAlterar nome")
+                        .flags(
+                                ItemFlag.HIDE_ATTRIBUTES
+                        )
+                        .make(),
+                (event) -> {
+                    Player player = (Player) event.getWhoClicked();
+
+                    player.closeInventory();
+
+                    player.sendMessage("§aInsira o novo nome desejado abaixo.");
+                    player.sendMessage("§7Caso queira cancelar digite 'cancelar'.");
+
+                    AsyncPlayerChatListener.on(
+                            player,
+                            (onChat) -> {
+                                onChat.setCancelled(true);
+
+                                String message = onChat.getMessage();
+
+                                if (message.equalsIgnoreCase("cancelar")) {
+                                    player.sendMessage("§cVocê cancelou a alteração com sucesso!");
+                                    return;
+                                }
+
+                                signShop.setName(message);
+                                signShop.updateSign();
+
+                                SignShopProvider.Repositories.SIGN_SHOP.provide().update(
+                                        signShop.getId(),
+                                        signShop.getName(),
+                                        signShop.getItem(),
+                                        signShop.getQuantity(),
+                                        signShop.getPrice()
+                                );
+                            }
+                    );
+                }
+        );
+
+        this.setItem(
+                35,
+                new ItemBuilder(Material.LAVA_BUCKET)
                         .name("§cDestruir")
                         .flags(
                                 ItemFlag.HIDE_ATTRIBUTES
@@ -144,10 +199,10 @@ public class SignShopEditInventory extends CustomInventory {
                                 SignShopProvider.Repositories.SIGN_SHOP.provide().delete(signShop.getId());
                             },
                             target -> {
-                                // nada
+                                player.openInventory(this);
                             },
                             new ItemBuilder(Material.PAPER)
-                                    .name(String.format("Loja - #%d", signShop.getId()))
+                                    .name(String.format("§eLoja - #%d", signShop.getId()))
                                     .make()
                     );
 
@@ -155,44 +210,6 @@ public class SignShopEditInventory extends CustomInventory {
                             "§7Ao clicar aqui, está",
                             "§7loja será deletada."
                     ));
-                }
-        );
-
-
-        this.setItem(
-                32,
-                new ItemBuilder(Material.STORAGE_MINECART)
-                        .name("§cDestruir")
-                        .flags(
-                                ItemFlag.HIDE_ATTRIBUTES
-                        )
-                        .make(),
-                (event) -> {
-                    Player player = (Player) event.getWhoClicked();
-
-                    player.sendMessage("§aInsira o novo nome desejado abaixo.");
-                    player.sendMessage("§7Caso queira cancelar digite 'cancelar'.");
-
-                    AsyncPlayerChatListener.on(
-                            player,
-                            (onChat) -> {
-                                String message = onChat.getMessage();
-
-                                if (message.equalsIgnoreCase("cancelar")) {
-                                    return;
-                                }
-
-                                signShop.setName(message);
-
-                                SignShopProvider.Repositories.SIGN_SHOP.provide().update(
-                                        signShop.getId(),
-                                        signShop.getName(),
-                                        signShop.getItem(),
-                                        signShop.getQuantity(),
-                                        signShop.getPrice()
-                                );
-                            }
-                    );
                 }
         );
     }

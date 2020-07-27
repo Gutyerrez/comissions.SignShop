@@ -6,6 +6,7 @@ import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;
 import io.github.gutyerrez.core.spigot.misc.utils.ItemBuilder;
 import io.github.gutyerrez.signshop.SignShopProvider;
 import io.github.gutyerrez.signshop.api.SignShop;
+import io.github.gutyerrez.signshop.inventories.SignShopEditInventory;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -30,6 +31,15 @@ public class PlayerInteractListener implements Listener {
                 SignShop signShop = this.getSignShop(event);
 
                 if (signShop != null) {
+                    event.setCancelled(true);
+
+                    if (player.isSneaking()) {
+                        player.openInventory(
+                                new SignShopEditInventory(signShop)
+                        );
+                        return;
+                    }
+
                     ImmutableSet<String> tryBuy = signShop.tryBuy(player);
 
                     if (!tryBuy.isEmpty()) {
@@ -53,6 +63,8 @@ public class PlayerInteractListener implements Listener {
                 SignShop signShop = this.getSignShop(event);
 
                 if (signShop != null) {
+                    event.setCancelled(true);
+
                     ImmutableSet<String> trySell = signShop.trySell(player);
 
                     if (!trySell.isEmpty()) {

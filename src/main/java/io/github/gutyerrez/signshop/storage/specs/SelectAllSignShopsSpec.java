@@ -43,7 +43,7 @@ public class SelectAllSignShopsSpec extends SelectSqlSpec<Map<Location, SignShop
                                         resultSet.getString("serialized_item")
                                 )[0],
                                 resultSet.getInt("quantity"),
-                                resultSet.getDouble("prie"),
+                                resultSet.getDouble("price"),
                                 serializedLocation
                         )
                 );
