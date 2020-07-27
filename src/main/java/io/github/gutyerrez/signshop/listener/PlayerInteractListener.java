@@ -1,6 +1,7 @@
 package io.github.gutyerrez.signshop.listener;
 
 import com.google.common.collect.ImmutableSet;
+import io.github.gutyerrez.core.shared.misc.utils.ChatColor;
 import io.github.gutyerrez.core.shared.misc.utils.NumberUtils;
 import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;
 import io.github.gutyerrez.core.spigot.misc.utils.ItemBuilder;
@@ -48,6 +49,13 @@ public class PlayerInteractListener implements Listener {
                     }
 
                     SignShopProvider.Hooks.ECONOMY.get().withdrawPlayer(player, signShop.getPrice());
+
+                    player.sendMessage(String.format(
+                            "§aVocê comprou %dx %s por %s",
+                            signShop.getQuantity(),
+                            ChatColor.stripColor(signShop.getFancyName()),
+                            NumberUtils.format(signShop.getPrice())
+                    ));
 
                     InventoryUtils.give(
                             player,
