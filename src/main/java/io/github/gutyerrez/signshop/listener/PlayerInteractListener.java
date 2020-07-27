@@ -1,5 +1,7 @@
 package io.github.gutyerrez.signshop.listener;
 
+import com.google.common.collect.ImmutableSet;
+import io.github.gutyerrez.core.shared.misc.utils.NumberUtils;
 import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;
 import io.github.gutyerrez.core.spigot.misc.utils.ItemBuilder;
 import io.github.gutyerrez.signshop.SignShopProvider;
@@ -12,8 +14,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-
-import java.util.Set;
 
 /**
  * @author SrGutyerrez
@@ -30,7 +30,7 @@ public class PlayerInteractListener implements Listener {
                 SignShop signShop = this.getSignShop(event);
 
                 if (signShop != null) {
-                    Set<String> tryBuy = signShop.tryBuy(player);
+                    ImmutableSet<String> tryBuy = signShop.tryBuy(player);
 
                     if (!tryBuy.isEmpty()) {
                         tryBuy.forEach(player::sendMessage);
@@ -50,7 +50,40 @@ public class PlayerInteractListener implements Listener {
                 break;
             }
             case LEFT_CLICK_BLOCK: {
+                SignShop signShop = this.getSignShop(event);
 
+                if (signShop != null) {
+                    ImmutableSet<String> trySell = signShop.trySell(player);
+
+                    if (!trySell.isEmpty()) {
+                        trySell.forEach(player::sendMessage);
+                        return;
+                    }
+
+                    SignShopProvider.Hooks.ECONOMY.get().withdrawPlayer(player, signShop.getPrice());
+
+                    Integer count = InventoryUtils.countItems(
+                            player.getInventory(),
+                            signShop.getItem()
+                    );
+
+                    Integer removed = InventoryUtils.removeItems(
+                            player.getInventory(),
+                            signShop.getItem(),
+                            player.isSneaking() ? count : signShop.getQuantity()
+                    );
+
+                    if (removed > 0) {
+                        Double moneyReceived = signShop.getPrice() * removed / signShop.getQuantity();
+
+                        player.sendMessage(String.format(
+                                "§aVocê vendeu %d itens e ganhou %s coins.",
+                                removed,
+                                NumberUtils.format(moneyReceived)
+                        ));
+                    }
+                    return;
+                }
                 break;
             }
         }
