@@ -55,7 +55,7 @@ public class SignChangeListener implements Listener {
             return;
         }
 
-        event.setLine(1, String.format("%s %b", type.getPrefix(), price));
+        event.setLine(1, String.format("%s %.2f", type.getPrefix(), price));
 
         Integer quantity = Ints.tryParse(event.getLine(2));
 

@@ -55,7 +55,7 @@ public class InsertSignShopSpec extends InsertSqlSpec<SignShop> {
                             "`x`," +
                             "`y`," +
                             "`z`" +
-                            ");",
+                            ") VALUES (?,?,?,?,?,?,?,?,?);",
                     SignShopConstants.Databases.Mysql.Tables.SIGN_SHOP_TABLE_NAME
             );
 
