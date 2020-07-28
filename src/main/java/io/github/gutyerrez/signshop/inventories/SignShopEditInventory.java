@@ -201,7 +201,7 @@ public class SignShopEditInventory extends CustomInventory {
 
                                 block.breakNaturally();
 
-                                SignShopProvider.Cache.Local.SIGN_SHOP.provide().remove(block.getLocation());
+                                SignShopProvider.Cache.Local.SIGN_SHOP.provide().remove(block);
                                 SignShopProvider.Repositories.SIGN_SHOP.provide().delete(signShop.getId());
                             },
                             target -> {

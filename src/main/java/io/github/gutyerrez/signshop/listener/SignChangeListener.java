@@ -22,6 +22,11 @@ public class SignChangeListener implements Listener {
     @EventHandler
     public void onChange(SignChangeEvent event) {
         Player player = event.getPlayer();
+
+        if (!player.hasPermission("signshop.shops.create")) {
+            return;
+        }
+
         Block block = event.getBlock();
 
         String shopNameLine = event.getLine(0);

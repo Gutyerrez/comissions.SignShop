@@ -8,6 +8,7 @@ import io.github.gutyerrez.core.spigot.misc.utils.ItemBuilder;
 import io.github.gutyerrez.signshop.SignShopProvider;
 import io.github.gutyerrez.signshop.api.SignShop;
 import io.github.gutyerrez.signshop.inventories.SignShopEditInventory;
+import io.github.gutyerrez.signshop.inventories.SignShopPreviewItemInventory;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -34,9 +35,14 @@ public class PlayerInteractListener implements Listener {
                 if (signShop != null) {
                     event.setCancelled(true);
 
-                    if (player.isSneaking()) {
+                    if (player.isSneaking() && player.hasPermission("signshop.shops.edit")) {
                         player.openInventory(
                                 new SignShopEditInventory(signShop)
+                        );
+                        return;
+                    } else if (!player.hasPermission("signshop.shops.edit")) {
+                        player.openInventory(
+                                new SignShopPreviewItemInventory(signShop)
                         );
                         return;
                     }
@@ -121,7 +127,7 @@ public class PlayerInteractListener implements Listener {
                 Material.SIGN_POST,
                 Material.WALL_SIGN
         }, block.getType())) {
-            return SignShopProvider.Cache.Local.SIGN_SHOP.provide().get(block.getLocation());
+            return SignShopProvider.Cache.Local.SIGN_SHOP.provide().get(block);
         }
 
         return null;
