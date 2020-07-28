@@ -35,15 +35,16 @@ public class PlayerInteractListener implements Listener {
                 if (signShop != null) {
                     event.setCancelled(true);
 
-                    if (player.isSneaking() && player.hasPermission("signshop.shops.edit")) {
-                        player.openInventory(
-                                new SignShopEditInventory(signShop)
-                        );
-                        return;
-                    } else if (!player.hasPermission("signshop.shops.edit")) {
-                        player.openInventory(
-                                new SignShopPreviewItemInventory(signShop)
-                        );
+                    if (player.isSneaking()) {
+                        if (player.hasPermission("signshop.shops.edit")) {
+                            player.openInventory(
+                                    new SignShopEditInventory(signShop)
+                            );
+                        } else {
+                            player.openInventory(
+                                    new SignShopPreviewItemInventory(signShop)
+                            );
+                        }
                         return;
                     }
 

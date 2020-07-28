@@ -20,7 +20,7 @@ public class BlockBreakListener implements Listener {
         Player player = event.getPlayer();
         Block block = event.getBlock();
 
-        if (ArrayUtils.contains(new Material[] {
+        if (ArrayUtils.contains(new Material[]{
                 Material.SIGN,
                 Material.SIGN_POST,
                 Material.WALL_SIGN
@@ -30,11 +30,13 @@ public class BlockBreakListener implements Listener {
 
         SignShop signShop = SignShopProvider.Cache.Local.SIGN_SHOP.provide().get(block);
 
-        if (signShop != null && player.hasPermission("signshop.shops.delete")) {
-            SignShopProvider.Cache.Local.SIGN_SHOP.provide().remove(block);
-            SignShopProvider.Repositories.SIGN_SHOP.provide().delete(signShop.getId());
-        } else if (!player.hasPermission("signshop.shops.delete")) {
-            event.setCancelled(true);
+        if (signShop != null) {
+            if (player.hasPermission("signshop.shops.delete")) {
+                SignShopProvider.Cache.Local.SIGN_SHOP.provide().remove(block);
+                SignShopProvider.Repositories.SIGN_SHOP.provide().delete(signShop.getId());
+            } else {
+                event.setCancelled(true);
+            }
         }
     }
 
