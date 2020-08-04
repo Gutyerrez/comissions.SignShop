@@ -89,10 +89,6 @@ public class PlayerInteractListener implements Listener {
                         return;
                     }
 
-                    if (SignShopProvider.Hooks.ECONOMY.isActive()) {
-                        SignShopProvider.Hooks.ECONOMY.get().withdrawPlayer(player, signShop.getPrice());
-                    }
-
                     Integer count = InventoryUtils.countItems(
                             player.getInventory(),
                             signShop.getItem()
@@ -106,6 +102,10 @@ public class PlayerInteractListener implements Listener {
 
                     if (removed > 0) {
                         Double moneyReceived = signShop.getPrice() * removed / signShop.getQuantity();
+
+                        if (SignShopProvider.Hooks.ECONOMY.isActive()) {
+                            SignShopProvider.Hooks.ECONOMY.get().depositPlayer(player, moneyReceived);
+                        }
 
                         player.sendMessage(String.format(
                                 "§aVocê vendeu %d itens e ganhou %s coins.",
