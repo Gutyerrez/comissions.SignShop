@@ -1,9 +1,9 @@
 package io.github.gutyerrez.signshop.storage.specs;
 
 import com.google.common.collect.Maps;
-import io.github.gutyerrez.core.shared.contracts.storages.repositories.specs.PreparedStatementCreator;
-import io.github.gutyerrez.core.shared.contracts.storages.repositories.specs.ResultSetExtractor;
-import io.github.gutyerrez.core.shared.contracts.storages.repositories.specs.SelectSqlSpec;
+import io.github.gutyerrez.core.shared.storage.repositories.specs.PreparedStatementCreator;
+import io.github.gutyerrez.core.shared.storage.repositories.specs.ResultSetExtractor;
+import io.github.gutyerrez.core.shared.storage.repositories.specs.SelectSqlSpec;
 import io.github.gutyerrez.core.shared.world.location.SerializedLocation;
 import io.github.gutyerrez.core.spigot.CoreSpigotConstants;
 import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;

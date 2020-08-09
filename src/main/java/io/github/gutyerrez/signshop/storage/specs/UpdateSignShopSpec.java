@@ -1,7 +1,7 @@
 package io.github.gutyerrez.signshop.storage.specs;
 
-import io.github.gutyerrez.core.shared.contracts.storages.repositories.specs.PreparedStatementCreator;
-import io.github.gutyerrez.core.shared.contracts.storages.repositories.specs.UpdateSqlSpec;
+import io.github.gutyerrez.core.shared.storage.repositories.specs.PreparedStatementCreator;
+import io.github.gutyerrez.core.shared.storage.repositories.specs.UpdateSqlSpec;
 import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;
 import io.github.gutyerrez.signshop.SignShopConstants;
 import lombok.RequiredArgsConstructor;

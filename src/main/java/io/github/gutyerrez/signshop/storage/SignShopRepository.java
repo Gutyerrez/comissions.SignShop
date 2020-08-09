@@ -1,7 +1,7 @@
 package io.github.gutyerrez.signshop.storage;
 
-import io.github.gutyerrez.core.shared.contracts.storages.repositories.MysqlRepository;
 import io.github.gutyerrez.core.shared.providers.MysqlDatabaseProvider;
+import io.github.gutyerrez.core.shared.storage.repositories.MysqlRepository;
 import io.github.gutyerrez.core.shared.world.location.SerializedLocation;
 import io.github.gutyerrez.signshop.api.SignShop;
 import io.github.gutyerrez.signshop.storage.specs.*;
