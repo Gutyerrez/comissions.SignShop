@@ -6,7 +6,7 @@ import io.github.gutyerrez.core.shared.storage.repositories.specs.ResultSetExtra
 import io.github.gutyerrez.core.shared.storage.repositories.specs.SelectSqlSpec;
 import io.github.gutyerrez.core.shared.world.location.SerializedLocation;
 import io.github.gutyerrez.core.spigot.CoreSpigotConstants;
-import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;
+import io.github.gutyerrez.core.spigot.misc.utils.ItemSerializer;
 import io.github.gutyerrez.signshop.SignShopConstants;
 import io.github.gutyerrez.signshop.api.SignShop;
 import org.bukkit.Location;
@@ -39,9 +39,9 @@ public class SelectAllSignShopsSpec extends SelectSqlSpec<Map<Location, SignShop
                                 SignShop.Type.valueOf(
                                         resultSet.getString("type")
                                 ),
-                                resultSet.getString("serialized_item") == null ? null : InventoryUtils.deserializeContents(
+                                resultSet.getString("serialized_item") == null ? null : ItemSerializer.fromBase64(
                                         resultSet.getString("serialized_item")
-                                )[0],
+                                ),
                                 resultSet.getInt("quantity"),
                                 resultSet.getDouble("price"),
                                 serializedLocation

@@ -3,7 +3,7 @@ package io.github.gutyerrez.signshop.storage.specs;
 import io.github.gutyerrez.core.shared.storage.repositories.specs.InsertSqlSpec;
 import io.github.gutyerrez.core.shared.storage.repositories.specs.PreparedStatementCreator;
 import io.github.gutyerrez.core.shared.world.location.SerializedLocation;
-import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;
+import io.github.gutyerrez.core.spigot.misc.utils.ItemSerializer;
 import io.github.gutyerrez.signshop.SignShopConstants;
 import io.github.gutyerrez.signshop.api.SignShop;
 import lombok.RequiredArgsConstructor;
@@ -66,10 +66,8 @@ public class InsertSignShopSpec extends InsertSqlSpec<SignShop> {
 
             preparedStatement.setString(1, this.name);
             preparedStatement.setString(2, this.type.toString());
-            preparedStatement.setString(3, this.item == null ? null : InventoryUtils.serializeContents(
-                    new ItemStack[]{
+            preparedStatement.setString(3, this.item == null ? null : ItemSerializer.toBase64(
                             this.item
-                    }
             ));
             preparedStatement.setInt(4, this.quantity);
             preparedStatement.setDouble(5, this.price);
