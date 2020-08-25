@@ -24,6 +24,8 @@ public class SignShopPlugin extends CustomPlugin {
 
     @Override
     public void onEnable() {
+        saveDefaultConfig();
+
         SignShopProvider.prepare();
 
         PluginManager pluginManager = Bukkit.getPluginManager();

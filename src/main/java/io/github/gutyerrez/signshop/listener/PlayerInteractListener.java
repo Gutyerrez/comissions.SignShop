@@ -9,6 +9,7 @@ import io.github.gutyerrez.signshop.SignShopProvider;
 import io.github.gutyerrez.signshop.api.SignShop;
 import io.github.gutyerrez.signshop.inventories.SignShopEditInventory;
 import io.github.gutyerrez.signshop.inventories.SignShopPreviewItemInventory;
+import io.github.gutyerrez.signshop.misc.times.SellTime;
 import org.apache.commons.lang.ArrayUtils;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -102,6 +103,14 @@ public class PlayerInteractListener implements Listener {
 
                     if (removed > 0) {
                         Double moneyReceived = signShop.getPrice() * removed / signShop.getQuantity();
+
+                        if (SignShopProvider.Hooks.SELL_TIME.isActive()) {
+                            for (SellTime sellTime : SignShopProvider.Cache.Local.SELL_TIME.provide().get()) {
+                                if (sellTime.isBetweenStartTimeAndEndTime()) {
+                                    moneyReceived -= sellTime.getPercent() * moneyReceived / 100;
+                                }
+                            }
+                        }
 
                         if (SignShopProvider.Hooks.ECONOMY.isActive()) {
                             SignShopProvider.Hooks.ECONOMY.get().depositPlayer(player, moneyReceived);

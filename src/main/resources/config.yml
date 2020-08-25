@@ -1,0 +1,5 @@
+settings:
+  sell_options:
+    enabled: false
+    times:
+      - '01:00-10:00|40'
