@@ -2,7 +2,7 @@ package io.github.gutyerrez.signshop.inventories;
 
 import io.github.gutyerrez.core.spigot.CoreSpigotConstants;
 import io.github.gutyerrez.core.spigot.inventory.CustomInventory;
-import io.github.gutyerrez.core.spigot.misc.utils.ItemBuilder;
+import io.github.gutyerrez.core.spigot.misc.utils.old.ItemBuilder;
 import io.github.gutyerrez.signshop.SignShopProvider;
 import io.github.gutyerrez.signshop.api.SignShop;
 import org.bukkit.Material;

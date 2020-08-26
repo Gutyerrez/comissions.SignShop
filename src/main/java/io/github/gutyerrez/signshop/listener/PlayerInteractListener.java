@@ -4,7 +4,7 @@ import com.google.common.collect.ImmutableSet;
 import io.github.gutyerrez.core.shared.misc.utils.ChatColor;
 import io.github.gutyerrez.core.shared.misc.utils.NumberUtils;
 import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;
-import io.github.gutyerrez.core.spigot.misc.utils.ItemBuilder;
+import io.github.gutyerrez.core.spigot.misc.utils.old.ItemBuilder;
 import io.github.gutyerrez.signshop.SignShopProvider;
 import io.github.gutyerrez.signshop.api.SignShop;
 import io.github.gutyerrez.signshop.inventories.SignShopEditInventory;
@@ -105,9 +105,13 @@ public class PlayerInteractListener implements Listener {
                         Double moneyReceived = signShop.getPrice() * removed / signShop.getQuantity();
 
                         if (SignShopProvider.Hooks.SELL_TIME.isActive()) {
+//                            System.out.println("Opa");
+
                             for (SellTime sellTime : SignShopProvider.Cache.Local.SELL_TIME.provide().get()) {
                                 if (sellTime.isBetweenStartTimeAndEndTime()) {
                                     moneyReceived -= sellTime.getPercent() * moneyReceived / 100;
+
+//                                    System.out.println("Apliquei -" + sellTime.getPercent() + "%");
                                 }
                             }
                         }

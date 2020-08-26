@@ -12,7 +12,9 @@ public class SellTimeOptionHook extends Hook<Boolean>
     @Override
     public Boolean prepare()
     {
-        return SignShopPlugin.getInstance().getConfig().getBoolean("settings.sell_options.enable");
+        return this.setInstance(
+                SignShopPlugin.getInstance().getConfig().getBoolean("settings.sell_options.enable")
+        );
     }
 
 }

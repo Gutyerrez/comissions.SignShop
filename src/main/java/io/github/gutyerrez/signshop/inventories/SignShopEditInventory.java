@@ -4,7 +4,7 @@ import com.google.common.primitives.Doubles;
 import com.google.common.primitives.Ints;
 import io.github.gutyerrez.core.spigot.inventory.ConfirmInventory;
 import io.github.gutyerrez.core.spigot.inventory.CustomInventory;
-import io.github.gutyerrez.core.spigot.misc.utils.ItemBuilder;
+import io.github.gutyerrez.core.spigot.misc.utils.old.ItemBuilder;
 import io.github.gutyerrez.signshop.SignShopProvider;
 import io.github.gutyerrez.signshop.api.SignShop;
 import io.github.gutyerrez.signshop.listener.AsyncPlayerChatListener;

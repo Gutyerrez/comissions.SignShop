@@ -3,7 +3,9 @@ package io.github.gutyerrez.signshop.storage.specs;
 import io.github.gutyerrez.core.shared.storage.repositories.specs.PreparedStatementCreator;
 import io.github.gutyerrez.core.shared.storage.repositories.specs.UpdateSqlSpec;
 import io.github.gutyerrez.core.spigot.misc.utils.InventoryUtils;
+import io.github.gutyerrez.core.spigot.misc.utils.ItemSerializer;
 import io.github.gutyerrez.signshop.SignShopConstants;
+import io.github.gutyerrez.signshop.SignShopPlugin;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.inventory.ItemStack;
 
@@ -36,12 +38,22 @@ public class UpdateSignShopSpec extends UpdateSqlSpec<Void> {
 
             PreparedStatement preparedStatement = connection.prepareStatement(query);
 
-            preparedStatement.setString(1, this.name);
-            preparedStatement.setString(2, this.item == null ? null : InventoryUtils.serializeContents(
-                    new ItemStack[]{
+            String serializedItemStack = null;
+
+            if (this.item != null) {
+                if (SignShopPlugin.getInstance().getConfig().getBoolean("settings.item_stack.old")) {
+                    serializedItemStack = ItemSerializer.toBase64(
                             this.item
-                    }
-            ));
+                    );
+                } else {
+                    serializedItemStack = InventoryUtils.serializeContents(
+                            new ItemStack[] { this.item }
+                    );
+                }
+            }
+
+            preparedStatement.setString(1, this.name);
+            preparedStatement.setString(2, serializedItemStack);
             preparedStatement.setInt(3, this.quantity);
             preparedStatement.setDouble(4, this.price);
             preparedStatement.setInt(5, this.id);

@@ -83,7 +83,6 @@ public class SignChangeListener implements Listener {
         SignShop signShop = SignShopProvider.Repositories.SIGN_SHOP.provide().insert(
                 null,
                 type,
-                null,
                 quantity,
                 price,
                 serializedLocation

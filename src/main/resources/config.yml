@@ -1,4 +1,6 @@
 settings:
+  item_stack:
+    old: false
   sell_options:
     enabled: false
     times:

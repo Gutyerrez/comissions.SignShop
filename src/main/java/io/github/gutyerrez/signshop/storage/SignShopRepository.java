@@ -29,8 +29,8 @@ public class SignShopRepository extends MysqlRepository {
         return this.query(new SelectAllSignShopsSpec());
     }
 
-    public SignShop insert(String name, SignShop.Type type, ItemStack item, Integer quantity, Double price, SerializedLocation serializedLocation) {
-        return this.query(new InsertSignShopSpec(name, type, item, quantity, price, serializedLocation));
+    public SignShop insert(String name, SignShop.Type type, Integer quantity, Double price, SerializedLocation serializedLocation) {
+        return this.query(new InsertSignShopSpec(name, type, quantity, price, serializedLocation));
     }
 
     public void update(Integer id, String name, ItemStack item, Integer quantity, Double price) {
